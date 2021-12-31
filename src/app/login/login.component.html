@@ -1,0 +1,61 @@
+<div class="form-modal">
+    
+    <div class="form-toggle">
+        <button id="login-toggle" onclick="toggleLogin()">log in</button>
+        <button id="signup-toggle" onclick="toggleSignup()">sign up</button>
+    </div>
+
+    <div id="login-form">
+        <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()">
+            <div class="input-group form-group">
+              <input type="text" class="form-control" placeholder="Email"  formControlName="EmpEmail">
+            </div>
+            <div *ngIf="(loginForm.get('EmpEmail')?.invalid && loginForm.get('EmpEmail')?.touched) || loginForm.get('EmpEmail')?.dirty">
+              <small class="text-danger" *ngIf="loginForm.get('EmpEmail')?.errors?.required">Email address is required</small>
+              <small class="text-danger" *ngIf="loginForm.get('EmpEmail')?.errors?.pattern">Email address is invalid</small>
+            </div>
+
+            <div class="input-group form-group">
+              <input type="password" class="form-control" placeholder="password" formControlName="password">
+            </div>
+            <div *ngIf="(loginForm.get('password')?.invalid && loginForm.get('password')?.touched) || loginForm.get('password')?.dirty">
+              <small class="text-danger" *ngIf="loginForm.get('password')?.errors?.required">Password Required</small>
+            </div>
+            <div class="form-group">
+              <input type="submit" [disabled]="!loginForm.valid" value="Login" class="btn float-right login_btn">
+            </div>
+            
+          </form>
+    </div>
+
+    <div id="signup-form">
+      <form [formGroup]="SignupForm" (ngSubmit)="signupSubmit()">
+
+        <div class="input-group form-group">
+          <input type="text" class="form-control" placeholder="Email"  formControlName="EmpEmail">
+        </div>
+        <div *ngIf="(SignupForm.get('EmpEmail')?.invalid && SignupForm.get('EmpEmail')?.touched) || SignupForm.get('EmpEmail')?.dirty">
+          <small class="text-danger" *ngIf="SignupForm.get('EmpEmail')?.errors?.required">Email address is required</small>
+          <small class="text-danger" *ngIf="SignupForm.get('EmpEmail')?.errors?.pattern">Email address is invalid</small>
+        </div>
+
+        <div class="input-group form-group">
+          <input type="text" class="form-control" placeholder="Employee Name"  formControlName="EmpName">
+        </div>
+        <div *ngIf="(SignupForm.get('EmpName')?.invalid && SignupForm.get('EmpName')?.touched) || SignupForm.get('EmpName')?.dirty">
+          <small class="text-danger" *ngIf="SignupForm.get('EmpName')?.errors?.required">Name is required</small>
+        </div>
+
+        <div class="input-group form-group">
+          <input type="password" class="form-control" placeholder="password" formControlName="Password">
+        </div>
+        <div *ngIf="(SignupForm.get('Password')?.invalid && SignupForm.get('Password')?.touched) || SignupForm.get('Password')?.dirty">
+          <small class="text-danger" *ngIf="SignupForm.get('Password')?.errors?.required">Password Required</small>
+          <small class="text-danger" *ngIf="SignupForm.get('Password')?.errors?.pattern">Password is invalid</small>
+        </div>
+        
+        <div class="form-group">
+          <input type="submit" [disabled]="!SignupForm.valid" value="Signup" class="btn float-right login_btn">
+        </div>
+      </form>
+    </div>

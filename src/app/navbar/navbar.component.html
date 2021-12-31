@@ -1,0 +1,111 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/dashboard"><strong>RMS</strong></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/resource">Resources</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getData()" >Request</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link">Hi, {{empName}}</a>
+            </li>
+            <li>
+              <button class="btn btn-outline-success" routerLink="/login" (click)="logout()">Log Out</button>
+            </li>
+          </ul>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  >
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content test">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Please fill out the details
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form id="dataTable" #resourceForm="ngForm" (ngSubmit)="requestResource(resourceForm.value)">
+          <div class="row">
+            <div class="col">
+              <label  class="form-label">Resource Type</label>
+            </div>
+            <div class="col">
+              <div class="dropdown">
+                <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{rType}}
+                </button>
+                <ul class="dropdown-menu"  aria-labelledby="dropdownMenuButton1">
+                  <li *ngFor="let type of ResourceTypeList">
+                    <a class="dropdown-item" (click)="updateData(type)">{{type.rTypeName}}</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <br>
+          <input type="text" name="rTypeId" placeholder="" hidden [(ngModel)]="rTypeId"/>
+          <input type="text" name="RequestTo" placeholder="" hidden [(ngModel)]="requestTo"/>
+          <input type="text" name="EmpEmail" placeholder="" hidden [(ngModel)]="EmpEmail"/>
+          <input type="text" name="Status" placeholder="" hidden [(ngModel)]="Status"/>
+          <div class="row">
+            <div class="col">
+              <label  class="form-label">Description</label>
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" name="Description" placeholder="Description" required [(ngModel)]="Description" />
+            </div>
+          </div>
+          <br/>
+          <div class="row">
+            <div class="col">
+              <label  class="form-label">RequestTo</label>
+            </div>
+            <div class="col">
+              <div class="dropdown">
+                <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{requestToName}}
+                </button>
+                <ul class="dropdown-menu"  aria-labelledby="dropdownMenuButton1">
+                  <li *ngFor="let type of RequestToList">
+                    <a class="dropdown-item" (click)="updateRequest(type)">{{type.empName}} : {{type.empUserName}}</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <br>
+          <button class="btn btn-outline-success" data-bs-dismiss="modal" id="liveToastBtn">
+            Request Resource
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+  
